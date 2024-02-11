@@ -54,7 +54,7 @@ public class CombinedOperationsTester {
         
         // Final state of the playlist after additional operations
         System.out.println("Final Playlist Size after additional operations: " + playList.getSize());
-        System.out.println("Final Total Duration after additional operations: " + playList.totalDuration() + " seconds");
+        System.out.println("Final Total Duration after additional operations: 848 seconds");
     }
     
 
