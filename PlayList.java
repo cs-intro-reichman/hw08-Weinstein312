@@ -94,32 +94,36 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        //// replace the following statement with your code
-        if ((i >= 0) && (i <= size) && (size < maxSize)) {
+        if (size == maxSize || i > maxSize || i < 0){
+            return false;
+        }
+
+        if (size == 0 || i == size) {
+            add(track);
+        } 
+        else {
             for (int j = size; j > i; j--) {
-                tracks[j + 1] = tracks[j];
+                tracks[j] = tracks[j - 1];
             }
             tracks[i] = track;
             size++;
-            return true;
         }
-        return false;
+        return true;
     }
      
     /** Removes the track in the given index from this list.
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        //// replace this comment with your code
-        if ((size > 0) && (i >= 0) && (i <= size)) {
-            for (int j = i; j < size - 1; j++) {
-                tracks[j - 1] = tracks[j];
-            }
-            tracks[size - 1] = null;
-            size--;
-        }
-        else {
+        if (size == maxSize || i > maxSize || i < 0) {
             return;
+        }
+
+        if (i < size && i >= 0){
+            for (int j = i; j < size ; j++){
+                tracks[j] = tracks[j+1];
+            }
+            size--;
         }
     }
 
@@ -127,23 +131,8 @@ class PlayList {
      *  If such a track is not found, or the list is empty, or the given index
      *  is negative or too big for this list, does nothing. */
     public void remove(String title) {
-        //// replace this comment with your code
-        int titleIndex = -1;
-        for (int i = 0; i < size; i++) {
-            if (title.equals(tracks[i].getTitle())) {
-                titleIndex = i;
-            }
-        }
-
-        if (titleIndex != -1) {
-            for (int j = titleIndex; j < size - 1; j++) {
-                tracks[j - 1] = tracks[j];
-            }
-            tracks[size - 1] = null;
-            size--;
-        }
-        else {
-            return;
+        if (indexOf(title) != -1) {
+            remove(indexOf(title));
         }
     }
 
